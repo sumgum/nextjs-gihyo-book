@@ -7,12 +7,18 @@ body {
 }
 
 a {
-  color: inherit;
+  color: "#000";
   text-decoration: none;
+  transition: .25s;
+  cursor: pointer;
 }
 
 * {
   box-sizing: border-box;
+}
+
+ol, ul {
+  list-style: none;
 }
 
 @media (prefers-color-scheme: dark) {
