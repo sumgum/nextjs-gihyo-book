@@ -1,7 +1,7 @@
 // 商品のカテゴリ
 export type Category = 'shoes' | 'clothes' | 'book';
 // 商品の状態
-export type Condtition = 'new' | 'used';
+export type Condition = 'new' | 'used';
 
 // ユーザー
 export type User = {
