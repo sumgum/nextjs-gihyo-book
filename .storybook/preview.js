@@ -13,7 +13,7 @@ export const parameters = {
   },
 };
 
-export const createGlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   html,
   body,
   textarea {
