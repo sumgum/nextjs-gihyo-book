@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-
 import { theme } from 'themes';
 import type { ResponsiveProp, Responsive } from 'types';
 
@@ -8,24 +7,24 @@ import type { ResponsiveProp, Responsive } from 'types';
 export type AppTheme = typeof theme;
 
 type SpaceThemeKeys = keyof typeof theme.space;
-type FontSizeThemeKeys = keyof typeof theme.fontSizes;
-type LetterSpacingThemeKeys = keyof typeof theme.letterSpacing;
-type LineHeightThemeKeys = keyof typeof theme.lineHeights;
 type ColorThemeKeys = keyof typeof theme.colors;
+type FontSizeThemeKeys = keyof typeof theme.fontSizes;
+type LetterSpacingThemeKeys = keyof typeof theme.letterSpacings;
+type LineHeightThemeKeys = keyof typeof theme.lineHeights;
 
 // 各Themeのキーの型
 export type Space = SpaceThemeKeys | (string & {});
+export type Color = ColorThemeKeys | (string & {});
 export type FontSize = FontSizeThemeKeys | (string & {});
 export type LetterSpacing = LetterSpacingThemeKeys | (string & {});
 export type LineHeight = LineHeightThemeKeys | (string & {});
-export type Color = ColorThemeKeys | (string & {});
 
-// ブレークポイント
+// ブレイクポイント
 const BREAKPOINTS: { [key: string]: string } = {
-  sm: '640px',
-  md: '768px',
-  lg: '1024px',
-  xl: '1280px',
+  sm: '640px', // 640px以上
+  md: '768px', // 768px以上
+  lg: '1024px', // 1024px以上
+  xl: '1280px', // 1280px以上
 };
 
 /**
@@ -33,7 +32,7 @@ const BREAKPOINTS: { [key: string]: string } = {
  * @param propKey CSSプロパティ
  * @param prop Responsive型
  * @param theme AppTheme
- * @returns CSSプロパティとその値（ex. background-color: white;）
+ * @returns CSSプロパティとその値 (ex. background-color: white;)
  */
 export function toPropValue<T>(
   propKey: string,
@@ -46,12 +45,13 @@ export function toPropValue<T>(
     const result = [];
     for (const responsiveKey in prop) {
       if (responsiveKey === 'base') {
+        // デフォルトのスタイル
         result.push(
           `${propKey}: ${toThemeValueIfNeeded(
             propKey,
             prop[responsiveKey],
             theme,
-          )}`,
+          )};`,
         );
       } else if (
         responsiveKey === 'sm' ||
@@ -65,14 +65,16 @@ export function toPropValue<T>(
           propKey,
           prop[responsiveKey],
           theme,
-        )}`;
+        )};`;
         result.push(`@media screen and (min-width: ${breakpoint}) {${style}}`);
       }
     }
     return result.join('\n');
   }
-  return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)}`;
+
+  return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)};`;
 }
+
 const SPACE_KEYS = new Set([
   'margin',
   'margin-top',
@@ -85,7 +87,6 @@ const SPACE_KEYS = new Set([
   'padding-bottom',
   'padding-right',
 ]);
-
 const COLOR_KEYS = new Set(['color', 'background-color']);
 const FONT_SIZE_KEYS = new Set(['font-size']);
 const LINE_SPACING_KEYS = new Set(['letter-spacing']);
@@ -122,11 +123,11 @@ function toThemeValueIfNeeded<T>(propKey: string, value: T, theme?: AppTheme) {
     return theme.fontSizes[value];
   } else if (
     theme &&
-    theme.letterSpacing &&
+    theme.letterSpacings &&
     LINE_SPACING_KEYS.has(propKey) &&
     isLetterSpacingThemeKeys(value, theme)
   ) {
-    return theme.letterSpacing[value];
+    return theme.letterSpacings[value];
   } else if (
     theme &&
     theme.lineHeights &&
@@ -164,14 +165,16 @@ function isFontSizeThemeKeys(
 ): prop is FontSizeThemeKeys {
   return Object.keys(theme.fontSizes).filter((key) => key == prop).length > 0;
 }
+
 function isLetterSpacingThemeKeys(
   prop: any,
   theme: AppTheme,
 ): prop is LetterSpacingThemeKeys {
   return (
-    Object.keys(theme.letterSpacing).filter((key) => key == prop).length > 0
+    Object.keys(theme.letterSpacings).filter((key) => key == prop).length > 0
   );
 }
+
 function isLineHeightThemeKeys(
   prop: any,
   theme: AppTheme,

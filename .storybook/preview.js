@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
   * {
     box-sizing: border-box;
@@ -39,8 +39,10 @@ addDecorator((story) => (
     {story()}
   </ThemeProvider>
 ));
+
 // next/imageの差し替え
 const OriginalNextImage = NextImage.default;
+
 Object.defineProperty(NextImage, 'default', {
   configurable: true,
   value: (props) =>
