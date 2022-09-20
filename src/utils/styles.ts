@@ -10,14 +10,14 @@ export type AppTheme = typeof theme;
 type SpaceThemeKeys = keyof typeof theme.space;
 type FontSizeThemeKeys = keyof typeof theme.fontSizes;
 type LetterSpacingThemeKeys = keyof typeof theme.letterSpacing;
-type LineHeightsThemeKeys = keyof typeof theme.lineHeights;
+type LineHeightThemeKeys = keyof typeof theme.lineHeights;
 type ColorThemeKeys = keyof typeof theme.colors;
 
 // 各Themeのキーの型
 export type Space = SpaceThemeKeys | (string & {});
 export type FontSize = FontSizeThemeKeys | (string & {});
 export type LetterSpacing = LetterSpacingThemeKeys | (string & {});
-export type LineHeights = LineHeightsThemeKeys | (string & {});
+export type LineHeight = LineHeightThemeKeys | (string & {});
 export type Color = ColorThemeKeys | (string & {});
 
 // ブレークポイント
@@ -175,6 +175,6 @@ function isLetterSpacingThemeKeys(
 function isLineHeightThemeKeys(
   prop: any,
   theme: AppTheme,
-): prop is LineHeightsThemeKeys {
+): prop is LineHeightThemeKeys {
   return Object.keys(theme.lineHeights).filter((key) => key == prop).length > 0;
 }
