@@ -218,7 +218,7 @@ const Dropzone = (props: DropzoneProps) => {
         {/* ダミーインプット */}
         <DropzoneInputFile
           ref={inputRef}
-          type="input"
+          type="file"
           name={name}
           accept={acceptedFileTypes.join(',')}
           onChange={handleChange}
