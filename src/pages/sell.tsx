@@ -1,10 +1,10 @@
-import ProductFormContainer from 'containers/ProductFormContainer';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import AppLogo from 'components/atoms/AppLogo';
 import Box from 'components/layout/Box';
 import Flex from 'components/layout/Flex';
 import Layout from 'components/templates/Layout';
+import ProductFormContainer from 'containers/ProductFormContainer';
 import { useAuthContext } from 'contexts/AuthContext';
 import { useAuthGuard } from 'utils/hooks';
 
